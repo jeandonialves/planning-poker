@@ -1,0 +1,15 @@
+<form
+  [class.was-validated]="userForm.touched"
+  [formGroup]="userForm"
+  (ngSubmit)="submitHandler(userForm)"
+>
+  <div class="form-field">
+    <input
+      formControlName="name"
+      placeholder="Digite o seu nome"
+      class="form-control form-control-lg"
+      required
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Iniciar o jogo</button>
+</form>
