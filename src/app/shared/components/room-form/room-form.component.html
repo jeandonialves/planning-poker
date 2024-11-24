@@ -1,7 +1,23 @@
-<button
-  type="button"
-  class="btn btn-primary"
-  (click)="createRoom()"
->
+<button type="button" class="btn btn-primary" (click)="createRoom()">
   Criar sala
 </button>
+
+<hr />
+
+<div class="form-field">
+  <form
+    [class.was-validated]="roomForm.touched"
+    [formGroup]="roomForm"
+    (ngSubmit)="submitHandler(roomForm)"
+  >
+    <div class="form-field">
+      <input
+        formControlName="idRoom"
+        placeholder="Código da sala"
+        class="form-control"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-secondary">Entrar</button>
+  </form>
+</div>
