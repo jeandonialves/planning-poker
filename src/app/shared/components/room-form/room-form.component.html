@@ -1,6 +1,15 @@
-<button type="button" class="btn btn-primary" (click)="createRoom()">
+<button
+  type="button"
+  class="btn btn-primary"
+  (click)="createRoom()"
+  *ngIf="!codeRoom"
+>
   Criar sala
 </button>
+
+<a class="btn btn-primary" *ngIf="codeRoom" [routerLink]="'/sala/' + codeRoom">
+  Acessar sala
+</a>
 
 <hr />
 

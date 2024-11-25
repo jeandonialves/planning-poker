@@ -5,13 +5,15 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { RoomService } from '../../services/room/room.service';
+import { PlayerService } from '../../services/player/player.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-room-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './room-form.component.html',
   styleUrl: './room-form.component.scss',
 })
@@ -19,15 +21,19 @@ export class RoomFormComponent {
   submit$ = output<string>();
 
   roomForm: FormGroup;
+  codeRoom: string;
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private roomService = inject(RoomService);
+  private playerService = inject(PlayerService);
 
   constructor() {
     this.roomForm = this.fb.group({
       idRoom: ['', Validators.required],
     });
+
+    this.codeRoom = this.playerRoomCode();
   }
 
   createRoom(): void {
@@ -41,5 +47,14 @@ export class RoomFormComponent {
       return;
     }
     this.router.navigateByUrl(`/sala/${form.value.idRoom}`);
+  }
+
+  private playerRoomCode(): string {
+    const player = this.playerService.get();
+
+    if (player) {
+      return player.roomId;
+    }
+    return '';
   }
 }
