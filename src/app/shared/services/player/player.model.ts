@@ -3,8 +3,3 @@ export type Player = {
   name: string;
   roomId: string;
 };
-
-export type Room = {
-  createByPlayer: string;
-  players: {};
-};

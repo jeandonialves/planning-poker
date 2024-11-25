@@ -1,0 +1,92 @@
+.room-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  > .gradient {
+    width: 20px;
+    background-image: radial-gradient(
+      circle at 71.41% 95.91%,
+      #4967da 0,
+      #084198 50%,
+      #001e5b 100%
+    );
+  }
+
+  > .wrapper-page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    > .header {
+      .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 45px;
+
+        .text {
+          font-weight: 600;
+        }
+      }
+    }
+
+    > .container-page {
+      flex: 1;
+      display: flex;
+      .container {
+        display: flex;
+        flex: 1;
+        .inner-container {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+
+          .actions {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            align-items: center;
+          }
+
+          .players {
+            flex: 5;
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+
+            .player {
+              min-width: 150px;
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              .card {
+                min-height: 200px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+            }
+          }
+
+          .cards {
+            flex: 2;
+            display: flex;
+            gap: 16px;
+            padding-bottom: 16px;
+            flex-wrap: wrap;
+            .card {
+              flex: 1;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              min-width: 100px;
+              &:hover {
+                box-shadow: var(--bs-box-shadow-lg) !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

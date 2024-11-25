@@ -1,0 +1,102 @@
+<div class="room-page">
+  <div class="gradient shadow-lg"></div>
+  <div class="wrapper-page">
+    <div class="header shadow-lg">
+      <div class="container">
+        <div>
+          <p class="text">Planning Poker</p>
+        </div>
+        <div class="dropdown">
+          <button
+            class="btn btn-light btn-sm dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ playerName }}
+          </button>
+          <ul class="dropdown-menu">
+            <li><button class="dropdown-item" type="button">Sair</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container-page">
+      <div class="container">
+        <div class="inner-container">
+          <div class="actions">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="displayEstimatesHandler()"
+            >
+              Exibir
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="deleteEstimate()"
+            >
+              Deletar estimativas
+            </button>
+          </div>
+          <div class="players">
+            <div class="player" *ngFor="let player of players">
+              <div class="card">
+                <span *ngIf="room?.displayEstimates">{{
+                  player.estimated
+                }}</span>
+                <span *ngIf="!room?.displayEstimates">Planning<br />Poker</span>
+              </div>
+              <p class="text-center text-primary-emphasis">
+                {{ player.name }} <span *ngIf="player.estimated">✅</span>
+              </p>
+            </div>
+          </div>
+          <div class="cards">
+            <button
+              class="card bg-primary-subtle shadow"
+              (click)="estimatedHandler('1')"
+            >
+              1
+            </button>
+            <button
+              class="card bg-secondary-subtle shadow"
+              (click)="estimatedHandler('2')"
+            >
+              2
+            </button>
+            <button
+              class="card bg-success-subtle shadow"
+              (click)="estimatedHandler('3')"
+            >
+              3
+            </button>
+            <button
+              class="card bg-info-subtle shadow"
+              (click)="estimatedHandler('5')"
+            >
+              5
+            </button>
+            <button
+              class="card bg-warning-subtle shadow"
+              (click)="estimatedHandler('8')"
+            >
+              8
+            </button>
+            <button
+              class="card bg-danger-subtle shadow"
+              (click)="estimatedHandler('13')"
+            >
+              13
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="showUserForm">
+  <app-user-form (submit$)="submitUserForm()"></app-user-form>
+</ng-container>

@@ -1,5 +1,4 @@
 import { Component, inject, output } from '@angular/core';
-import { PlayerService } from '../../services/player/player.service';
 import {
   FormBuilder,
   FormGroup,
@@ -7,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RoomService } from '../../services/room/room.service';
 
 @Component({
   selector: 'app-room-form',
@@ -22,7 +22,7 @@ export class RoomFormComponent {
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
-  private playerService = inject(PlayerService);
+  private roomService = inject(RoomService);
 
   constructor() {
     this.roomForm = this.fb.group({
@@ -31,7 +31,7 @@ export class RoomFormComponent {
   }
 
   createRoom(): void {
-    this.playerService.createRoom().subscribe((idRoom) => {
+    this.roomService.create().subscribe((idRoom) => {
       this.submit$.emit(idRoom);
     });
   }
