@@ -12,6 +12,7 @@ import { PlayerService } from '../player/player.service';
 import { Room } from './room.model';
 import { ulid } from 'ulid';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Player } from '../player/player.model';
 
 @Injectable({
   providedIn: 'root',
@@ -56,6 +57,14 @@ export class RoomService {
         name: player.name,
         card: null,
       });
+    }
+  }
+
+  leave(idRoom: string): void {
+    const player = this.playerService.get();
+
+    if (player) {
+      this.db.object(`rooms/${idRoom}/players/${player.id}`).remove();
     }
   }
 

@@ -52,6 +52,11 @@ export class RoomComponent {
     this.roomService.updateEstimate(this.idRoom, value);
   }
 
+  leave(): void {
+    this.roomService.leave(this.idRoom);
+    this.router.navigateByUrl('/');
+  }
+
   get playerName(): string {
     const player = this.playerService.get();
     if (player) {
