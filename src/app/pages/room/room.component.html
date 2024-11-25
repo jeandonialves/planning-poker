@@ -16,7 +16,11 @@
             {{ playerName }}
           </button>
           <ul class="dropdown-menu">
-            <li><button class="dropdown-item" type="button" (click)="leave()">Sair</button></li>
+            <li>
+              <button class="dropdown-item" type="button" (click)="leave()">
+                Sair
+              </button>
+            </li>
           </ul>
         </div>
       </div>
@@ -98,5 +102,12 @@
 </div>
 
 <ng-container *ngIf="showUserForm">
-  <app-user-form (submit$)="submitUserForm()"></app-user-form>
+  <div class="modal-container">
+    <div class="modal-body-container">
+      <h1 class="h3">Planning Poker</h1>
+      <p class="text-body-secondary">Estime tarefas com precisão e agilidade, juntos!</p>
+      <br><br>
+      <app-user-form (submit$)="submitUserForm()"></app-user-form>
+    </div>
+  </div>
 </ng-container>
