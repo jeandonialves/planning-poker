@@ -16,6 +16,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    overflow: auto;
     > .header {
       .container {
         display: flex;
@@ -46,6 +47,7 @@
             justify-content: center;
             gap: 16px;
             align-items: center;
+            padding: 20px 0;
           }
 
           .players {
@@ -53,9 +55,11 @@
             display: flex;
             gap: 32px;
             flex-wrap: wrap;
+            padding: 20px 0;
+            justify-content: center;
 
             .player {
-              min-width: 150px;
+              width: 140px;
               display: flex;
               flex-direction: column;
               gap: 12px;
@@ -64,6 +68,10 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+
+                .label {
+                  font-weight: 600;
+                }
               }
             }
           }
@@ -72,16 +80,22 @@
             flex: 2;
             display: flex;
             gap: 16px;
-            padding-bottom: 16px;
+            padding: 15px;
             flex-wrap: wrap;
+
             .card {
               flex: 1;
               display: flex;
               align-items: center;
               justify-content: center;
               min-width: 100px;
+              min-height: 50px;
               &:hover {
                 box-shadow: var(--bs-box-shadow-lg) !important;
+              }
+
+              &.selected {
+                border-width: 4px;
               }
             }
           }

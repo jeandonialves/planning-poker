@@ -34,7 +34,7 @@
               class="btn btn-primary"
               (click)="displayEstimatesHandler()"
             >
-              Exibir
+              Revelar
             </button>
             <button
               type="button"
@@ -45,12 +45,20 @@
             </button>
           </div>
           <div class="players">
-            <div class="player" *ngFor="let player of players">
-              <div class="card">
-                <span *ngIf="room?.displayEstimates">{{
+            <div
+              class="player"
+              *ngFor="
+                let player of players
+                  | orderBy : (room?.displayEstimates ? 'estimated' : 'name')
+              "
+            >
+              <div class="card shadow">
+                <span class="h4" *ngIf="room?.displayEstimates">{{
                   player.estimated
                 }}</span>
-                <span *ngIf="!room?.displayEstimates">Planning<br />Poker</span>
+                <span *ngIf="!room?.displayEstimates" class="label"
+                  >Planning<br />Poker</span
+                >
               </div>
               <p class="text-center text-primary-emphasis">
                 {{ player.name }} <span *ngIf="player.estimated">✅</span>
@@ -59,40 +67,15 @@
           </div>
           <div class="cards">
             <button
-              class="card bg-primary-subtle shadow"
-              (click)="estimatedHandler('1')"
+              *ngFor="let item of sequence"
+              class="card shadow"
+              [ngClass]="item.color"
+              [class.selected]="
+                item.value == (estimatedPlayer$ | async)?.estimated
+              "
+              (click)="estimatedHandler(item.value)"
             >
-              1
-            </button>
-            <button
-              class="card bg-secondary-subtle shadow"
-              (click)="estimatedHandler('2')"
-            >
-              2
-            </button>
-            <button
-              class="card bg-success-subtle shadow"
-              (click)="estimatedHandler('3')"
-            >
-              3
-            </button>
-            <button
-              class="card bg-info-subtle shadow"
-              (click)="estimatedHandler('5')"
-            >
-              5
-            </button>
-            <button
-              class="card bg-warning-subtle shadow"
-              (click)="estimatedHandler('8')"
-            >
-              8
-            </button>
-            <button
-              class="card bg-danger-subtle shadow"
-              (click)="estimatedHandler('13')"
-            >
-              13
+              {{ item.value }}
             </button>
           </div>
         </div>
@@ -105,8 +88,10 @@
   <div class="modal-container">
     <div class="modal-body-container">
       <h1 class="h3">Planning Poker</h1>
-      <p class="text-body-secondary">Estime tarefas com precisão e agilidade, juntos!</p>
-      <br><br>
+      <p class="text-body-secondary">
+        Estime tarefas com precisão e agilidade, juntos!
+      </p>
+      <br /><br />
       <app-user-form (submit$)="submitUserForm()"></app-user-form>
     </div>
   </div>

@@ -7,19 +7,33 @@ import { UserFormComponent } from '../../shared/components/user-form/user-form.c
 import { PlayerService } from '../../shared/services/player/player.service';
 import { RoomService } from '../../shared/services/room/room.service';
 import { PlayerInRoom, Room } from '../../shared/services/room/room.model';
+import { OrderByPipe } from '../../shared/pipe/order-by.pipe';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-room',
   standalone: true,
-  imports: [CommonModule, UserFormComponent],
+  imports: [CommonModule, UserFormComponent, OrderByPipe],
   templateUrl: './room.component.html',
   styleUrl: './room.component.scss',
 })
 export class RoomComponent {
+  readonly sequence = [
+    { value: '1', color: 'bg-primary-subtle' },
+    { value: '2', color: 'bg-secondary-subtle' },
+    { value: '3', color: 'bg-success-subtle' },
+    { value: '5', color: 'bg-info-subtle' },
+    { value: '8', color: 'bg-warning-subtle' },
+    { value: '13', color: 'bg-danger-subtle' },
+  ];
+
   showUserForm = false;
 
   players: PlayerInRoom[] = [];
   room: Room | undefined;
+  selectedEstimate = '';
+
+  estimatedPlayer$: Observable<any> | undefined;
 
   private idRoom: string;
   private router = inject(Router);
@@ -86,6 +100,8 @@ export class RoomComponent {
       if (!room['players'] || !room.players[player.id]) {
         this.roomService.addPlayer(this.idRoom);
       }
+
+      this.setEstimatedByPlayer();
     });
   }
 
@@ -99,5 +115,9 @@ export class RoomComponent {
     this.roomService.getRoom(this.idRoom).subscribe((res) => {
       this.room = res as Room;
     });
+  }
+
+  private setEstimatedByPlayer(): void {
+    this.estimatedPlayer$ = this.roomService.getEstimatedByPlayer(this.idRoom);
   }
 }

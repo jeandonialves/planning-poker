@@ -4,6 +4,7 @@ import {
   catchError,
   from,
   map,
+  of,
   switchMap,
   tap,
   throwError,
@@ -116,5 +117,16 @@ export class RoomService {
         throw error;
       })
     );
+  }
+
+  getEstimatedByPlayer(idRoom: string): Observable<any> {
+    const player = this.playerService.get();
+
+    if (player) {
+      return this.db
+        .object(`rooms/${idRoom}/players/${player.id}`)
+        .valueChanges();
+    }
+    return of();
   }
 }
