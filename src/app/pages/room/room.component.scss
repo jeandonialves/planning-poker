@@ -27,6 +27,16 @@
         .text {
           font-weight: 600;
         }
+
+        .action {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          a {
+            color: black;
+          }
+        }
       }
     }
 
