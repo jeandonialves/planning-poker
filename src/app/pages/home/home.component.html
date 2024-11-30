@@ -3,7 +3,8 @@
 
   <div class="container-form shadow-lg">
     <div class="container-login">
-      <h1 class="h3">Planning Poker</h1>
+      <span class="badge rounded-pill text-bg-info">Beta</span>
+      <h1 class="h3 position-relative">Planning Poker </h1>
       <p class="text-body-secondary">Estime tarefas com precisão e agilidade, juntos!</p>
       <br><br>
       <app-user-form (submit$)="submitUserForm()" *ngIf="showForm.userForm" />

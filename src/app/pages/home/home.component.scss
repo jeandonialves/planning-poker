@@ -18,6 +18,10 @@
     flex-direction: column;
     justify-content: center;
     padding: 64px 128px;
+
+    .container-login > .badge {
+      margin-bottom: 5px;
+    }
   }
 }
 
