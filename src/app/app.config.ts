@@ -7,6 +7,7 @@ import { routes } from './app.routes';
 import { getAnalytics, provideAnalytics } from '@angular/fire/analytics';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { provideClientHydration } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,5 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+    provideClientHydration(),
   ],
 };
