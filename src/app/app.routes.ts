@@ -12,7 +12,12 @@ export const routes: Routes = [
       import('./pages/room/room.component').then((m) => m.RoomComponent),
   },
   {
+    path: 'pagina-nao-encontrada',
+    loadComponent: () =>
+      import('./pages/not-found/not-found.component').then((m) => m.NotFoundComponent),
+  },
+  {
     path: '**',
-    redirectTo: '',
+    redirectTo: 'pagina-nao-encontrada',
   },
 ];

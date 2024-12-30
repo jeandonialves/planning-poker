@@ -1,0 +1,38 @@
+.not-found {
+  .container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+
+    .image {
+      width: 100%;
+      flex: 1;
+    }
+
+    .container-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+  }
+}
+
+@media (width <= 768px) {
+  .not-found {
+    .container {
+      flex-direction: column;
+      gap: 8px;
+
+      .image {
+        flex: none;
+      }
+  
+      .container-text {
+        flex: none;
+      }
+    }
+  }
+}
