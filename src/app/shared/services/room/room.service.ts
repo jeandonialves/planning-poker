@@ -10,9 +10,12 @@ import {
   throwError,
 } from 'rxjs';
 import { PlayerService } from '../player/player.service';
-import { Room } from './room.model';
+import { PlayerInRoom, Room } from './room.model';
 import { ulid } from 'ulid';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
+import {
+  AngularFireDatabase,
+  AngularFireList,
+} from '@angular/fire/compat/database';
 import { Player } from '../player/player.model';
 
 @Injectable({
@@ -69,12 +72,26 @@ export class RoomService {
     }
   }
 
+  removePlayer(idRoom: string, playerId: string): void {
+    this.db.object(`rooms/${idRoom}/players/${playerId}`).remove();
+  }
+
   getRoom(id: string): Observable<any> {
     return this.db.object(`rooms/${id}`).valueChanges();
   }
 
   getPlayers(idRoom: string): Observable<any> {
-    return this.db.list(`rooms/${idRoom}/players`).valueChanges();
+    const itemsRef = this.db.list(
+      `rooms/${idRoom}/players`
+    ) as AngularFireList<any>;
+
+    return itemsRef
+      .snapshotChanges()
+      .pipe(
+        map((changes) =>
+          changes.map((c) => ({ id: c.payload.key, ...c.payload.val() }))
+        )
+      );
   }
 
   updateDisplayEstimated(idRoom: string, displayEstimates: boolean): void {

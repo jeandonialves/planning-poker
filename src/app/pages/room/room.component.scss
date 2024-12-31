@@ -89,6 +89,15 @@
                 .label {
                   font-weight: 600;
                 }
+
+                &.voted {
+                  border: 2px solid green;
+                }
+              }
+
+              .btn-delete-player {
+                background: none;
+                border: none;
               }
             }
           }

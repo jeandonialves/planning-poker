@@ -1,4 +1,5 @@
 export type PlayerInRoom = {
+  id: string;
   name: string;
   estimated: string;
 };

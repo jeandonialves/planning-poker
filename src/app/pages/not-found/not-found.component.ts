@@ -7,9 +7,8 @@ import {
   inject,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { RESPONSE } from '../../server.token';
 import { Response } from 'express';
-
+import { RESPONSE } from '../../tokens';
 
 @Component({
   standalone: true,

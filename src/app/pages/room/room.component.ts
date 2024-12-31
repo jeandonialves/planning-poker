@@ -8,7 +8,7 @@ import { PlayerService } from '../../shared/services/player/player.service';
 import { RoomService } from '../../shared/services/room/room.service';
 import { PlayerInRoom, Room } from '../../shared/services/room/room.model';
 import { OrderByPipe } from '../../shared/pipe/order-by.pipe';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-room',
@@ -16,6 +16,7 @@ import { Observable } from 'rxjs';
   imports: [CommonModule, UserFormComponent, OrderByPipe],
   templateUrl: './room.component.html',
   styleUrl: './room.component.scss',
+  host: { ngSkipHydration: 'true' },
 })
 export class RoomComponent {
   readonly sequence = [
@@ -71,6 +72,10 @@ export class RoomComponent {
     this.router.navigateByUrl('/');
   }
 
+  deletePlayer(player: PlayerInRoom): void {
+    this.roomService.removePlayer(this.idRoom, player.id);
+  }
+
   get playerName(): string {
     const player = this.playerService.get();
     if (player) {
@@ -80,35 +85,51 @@ export class RoomComponent {
   }
 
   private getRoomById(idRoom: string): void {
-    this.roomService.getById(idRoom).subscribe((res) => {
-      if (!res.exists()) {
-        this.router.navigate(['**']);
-        return;
-      }
+    this.roomService
+      .getById(idRoom)
+      .subscribe((res) => {
+        if (!res.exists()) {
+          this.router.navigate(['**']);
+          return;
+        }
 
-      if (!this.playerService.get()) {
-        this.showUserForm = true;
-        return;
-      }
+        if (!this.playerService.get()) {
+          this.showUserForm = true;
+          return;
+        }
 
-      const player = this.playerService.get();
-      if (!player) {
-        return;
-      }
+        const player = this.playerService.get();
+        if (!player) {
+          return;
+        }
 
-      const room: Room = res.val();
-      if (!room['players'] || !room.players[player.id]) {
-        this.roomService.addPlayer(this.idRoom);
-      }
+        const room: Room = res.val();
+        if (!room['players'] || !room.players[player.id]) {
+          this.roomService.addPlayer(this.idRoom);
+        }
 
-      this.setEstimatedByPlayer();
-    });
+        this.setEstimatedByPlayer();
+      });
   }
 
   private getPlayersInRoom(): void {
     this.roomService.getPlayers(this.idRoom).subscribe((res) => {
       this.players = res as PlayerInRoom[];
+
+      setTimeout(() => {
+        this.validatePlayerInRoom();
+      }, 100);
     });
+  }
+
+  private validatePlayerInRoom(): void {
+    const player = this.playerService.get();
+
+    if (player) {
+      if (!this.players.find((obj) => obj.id === player.id)) {
+        this.router.navigateByUrl('/');
+      }
+    }
   }
 
   private getRoom(): void {

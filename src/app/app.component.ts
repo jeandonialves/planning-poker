@@ -1,8 +1,6 @@
-import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { RouterOutlet } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +12,4 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AppComponent {
   title = 'Planning Poker';
-
-  static isBrowser = new BehaviorSubject<boolean>(false);
-
-  constructor(@Inject(PLATFORM_ID) private platformId: any) {
-    AppComponent.isBrowser.next(isPlatformBrowser(platformId));
-  }
 }
