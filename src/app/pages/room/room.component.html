@@ -48,7 +48,7 @@
     <div class="container-page">
       <div class="container">
         <div class="inner-container">
-          <div class="actions">
+          <div class="actions" *ngIf="isOwnerOfTheRoom">
             <button
               type="button"
               class="btn btn-primary"
@@ -93,7 +93,12 @@
               <p class="text-center text-primary-emphasis">
                 {{ player.name }}
 
-                <button title="Remover jogador" (click)="deletePlayer(player)" class="btn-delete-player">
+                <button
+                  title="Remover jogador"
+                  (click)="deletePlayer(player)"
+                  class="btn-delete-player"
+                  *ngIf="isOwnerOfTheRoom"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"

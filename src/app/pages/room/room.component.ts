@@ -84,6 +84,14 @@ export class RoomComponent {
     return '';
   }
 
+  get isOwnerOfTheRoom(): boolean {
+    const player = this.playerService.get();
+    if (player) {
+      return player.roomId === this.idRoom;
+    }
+    return false;
+  }
+
   private getRoomById(idRoom: string): void {
     this.roomService
       .getById(idRoom)
