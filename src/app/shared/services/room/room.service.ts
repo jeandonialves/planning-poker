@@ -110,6 +110,16 @@ export class RoomService {
     }
   }
 
+  updateSpectatorMode(idRoom: string, isChecked: boolean): void {
+    const player = this.playerService.get();
+
+    if (player) {
+      this.db.object(`rooms/${idRoom}/players/${player.id}`).update({
+        spectatorMode: isChecked,
+      });
+    }
+  }
+
   deleteEstimates(idRoom: string): Observable<void> {
     const itemsRef = from(
       this.db.database.ref(`rooms/${idRoom}/players`).get()
@@ -136,7 +146,7 @@ export class RoomService {
     );
   }
 
-  getEstimatedByPlayer(idRoom: string): Observable<any> {
+  getPlayerData(idRoom: string): Observable<any> {
     const player = this.playerService.get();
 
     if (player) {

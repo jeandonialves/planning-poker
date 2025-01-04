@@ -43,6 +43,22 @@
           a {
             color: black;
           }
+
+          .dropdown-menu {
+            min-width: 190px;
+
+            .form-switch {
+              display: flex !important;
+              flex-direction: row-reverse !important;
+              justify-content: space-between !important;
+              padding-left: 0;
+              align-items: center;
+            }
+
+            .form-switch label {
+              margin-right: 50px !important;
+             }
+          }
         }
       }
     }
@@ -74,7 +90,6 @@
             flex-wrap: wrap;
             padding: 20px 0;
             justify-content: center;
-            align-items: center;
 
             .player {
               width: 140px;

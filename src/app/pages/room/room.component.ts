@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { AfterViewInit, Component, inject } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -9,16 +9,17 @@ import { RoomService } from '../../shared/services/room/room.service';
 import { PlayerInRoom, Room } from '../../shared/services/room/room.model';
 import { OrderByPipe } from '../../shared/pipe/order-by.pipe';
 import { Observable, tap } from 'rxjs';
+import { FilterHookPipe } from '../../shared/pipe/filter-hook.pipe';
 
 @Component({
   selector: 'app-room',
   standalone: true,
-  imports: [CommonModule, UserFormComponent, OrderByPipe],
+  imports: [CommonModule, UserFormComponent, OrderByPipe, FilterHookPipe],
   templateUrl: './room.component.html',
   styleUrl: './room.component.scss',
   host: { ngSkipHydration: 'true' },
 })
-export class RoomComponent {
+export class RoomComponent implements AfterViewInit {
   readonly sequence = [
     { value: '1', color: 'bg-primary-subtle' },
     { value: '2', color: 'bg-secondary-subtle' },
@@ -32,9 +33,8 @@ export class RoomComponent {
 
   players: PlayerInRoom[] = [];
   room: Room | undefined;
-  selectedEstimate = '';
 
-  estimatedPlayer$: Observable<any> | undefined;
+  playerInRoom$: Observable<PlayerInRoom> | undefined;
 
   private idRoom: string;
   private router = inject(Router);
@@ -47,6 +47,9 @@ export class RoomComponent {
     this.getRoomById(this.idRoom);
     this.getPlayersInRoom();
     this.getRoom();
+  }
+  ngAfterViewInit(): void {
+    this.getPlayerData();
   }
 
   submitUserForm(): void {
@@ -76,6 +79,16 @@ export class RoomComponent {
     this.roomService.removePlayer(this.idRoom, player.id);
   }
 
+  spectatorModeChange(event: Event): void {
+    const isChecked = (<HTMLInputElement>event.target).checked;
+
+    this.roomService.updateSpectatorMode(this.idRoom, isChecked);
+  }
+
+  filterNoSpectatorMode(player: PlayerInRoom): boolean {
+    return !player.spectatorMode;
+  }
+
   get playerName(): string {
     const player = this.playerService.get();
     if (player) {
@@ -93,31 +106,27 @@ export class RoomComponent {
   }
 
   private getRoomById(idRoom: string): void {
-    this.roomService
-      .getById(idRoom)
-      .subscribe((res) => {
-        if (!res.exists()) {
-          this.router.navigate(['**']);
-          return;
-        }
+    this.roomService.getById(idRoom).subscribe((res) => {
+      if (!res.exists()) {
+        this.router.navigate(['**']);
+        return;
+      }
 
-        if (!this.playerService.get()) {
-          this.showUserForm = true;
-          return;
-        }
+      if (!this.playerService.get()) {
+        this.showUserForm = true;
+        return;
+      }
 
-        const player = this.playerService.get();
-        if (!player) {
-          return;
-        }
+      const player = this.playerService.get();
+      if (!player) {
+        return;
+      }
 
-        const room: Room = res.val();
-        if (!room['players'] || !room.players[player.id]) {
-          this.roomService.addPlayer(this.idRoom);
-        }
-
-        this.setEstimatedByPlayer();
-      });
+      const room: Room = res.val();
+      if (!room['players'] || !room.players[player.id]) {
+        this.roomService.addPlayer(this.idRoom);
+      }
+    });
   }
 
   private getPlayersInRoom(): void {
@@ -146,7 +155,7 @@ export class RoomComponent {
     });
   }
 
-  private setEstimatedByPlayer(): void {
-    this.estimatedPlayer$ = this.roomService.getEstimatedByPlayer(this.idRoom);
+  private getPlayerData(): void {
+    this.playerInRoom$ = this.roomService.getPlayerData(this.idRoom);
   }
 }

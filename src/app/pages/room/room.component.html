@@ -18,6 +18,22 @@
               {{ playerName }}
             </button>
             <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <div class="form-switch">
+                  <input
+                    class="form-check-input"
+                    [checked]="(playerInRoom$ | async)?.spectatorMode"
+                    type="checkbox"
+                    role="switch"
+                    id="flexSwitchCheckDefault"
+                    (change)="spectatorModeChange($event)"
+                  />
+                  <label class="form-check-label" for="flexSwitchCheckDefault"
+                    >Spectator mode</label
+                  >
+                </div>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
               <li>
                 <button class="dropdown-item" type="button" (click)="leave()">
                   Sair
@@ -69,6 +85,7 @@
               class="player"
               *ngFor="
                 let player of players
+                  | filterHook : filterNoSpectatorMode
                   | orderBy : (room?.displayEstimates ? 'estimated' : 'name')
               "
             >
@@ -118,13 +135,13 @@
               </p>
             </div>
           </div>
-          <div class="cards">
+          <div class="cards" *ngIf="!(playerInRoom$ | async)?.spectatorMode">
             <button
               *ngFor="let item of sequence"
               class="card shadow"
               [ngClass]="item.color"
               [class.selected]="
-                item.value == (estimatedPlayer$ | async)?.estimated
+                item.value == (playerInRoom$ | async)?.estimated
               "
               (click)="estimatedHandler(item.value)"
             >
