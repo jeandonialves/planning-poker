@@ -1,4 +1,5 @@
 import nx from '@nx/eslint-plugin';
+
 import baseConfig from '../../eslint.config.mjs';
 
 export default [
@@ -22,6 +23,12 @@ export default [
           type: 'element',
           prefix: 'app',
           style: 'kebab-case',
+        },
+      ],
+      '@angular-eslint/component-class-suffix': [
+        'error',
+        {
+          suffixes: ['Component', 'Page', 'Layout'],
         },
       ],
     },
