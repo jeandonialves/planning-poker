@@ -22,7 +22,7 @@
             "input": "apps/planning-poker/public"
           }
         ],
-        "styles": ["apps/planning-poker/src/styles.scss"],
+        "styles": ["./node_modules/ng-zorro-antd/ng-zorro-antd.min.css", "apps/planning-poker/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
