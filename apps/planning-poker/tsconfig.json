@@ -12,7 +12,8 @@
       "@core/*": ["apps/planning-poker/src/app/core/*"],
       "@domain/*": ["apps/planning-poker/src/app/domain/*"],
       "@shared/*": ["apps/planning-poker/src/app/shared/*"],
-      "@widget/*": ["apps/planning-poker/src/app/widget/*"]
+      "@widget/*": ["apps/planning-poker/src/app/widget/*"],
+      "@env/*": ["apps/planning-poker/src/environments/*"]
     }
   },
   "files": [],

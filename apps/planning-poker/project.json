@@ -23,6 +23,9 @@
           }
         ],
         "styles": ["./node_modules/ng-zorro-antd/ng-zorro-antd.min.css", "apps/planning-poker/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["apps/planning-poker/src/styles"]
+        },
         "scripts": []
       },
       "configurations": {
@@ -44,7 +47,13 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/planning-poker/src/environments/environment.ts",
+              "with": "apps/planning-poker/src/environments/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
