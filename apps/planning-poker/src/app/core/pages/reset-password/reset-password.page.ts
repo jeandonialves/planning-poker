@@ -5,11 +5,12 @@ import { Router, RouterModule } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-reset-password',
-  imports: [NzFormModule, NzButtonModule, NzInputModule, FormsModule, RouterModule],
+  imports: [NzFormModule, NzButtonModule, NzInputModule, NzCardModule, FormsModule, RouterModule],
   templateUrl: './reset-password.page.html',
   styleUrl: './reset-password.page.scss',
 })

@@ -1,15 +1,18 @@
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { injectSupabase } from '@shared/functions/inject-supabase.function';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { Router, RouterModule } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-login',
-  imports: [NzFormModule, NzButtonModule, NzInputModule, ReactiveFormsModule, RouterModule],
+  imports: [NzFormModule, NzButtonModule, NzInputModule, NzDividerModule, NzTypographyModule, NzCardModule, ReactiveFormsModule, RouterModule],
   templateUrl: './login.page.html',
   styleUrl: './login.page.scss',
 })

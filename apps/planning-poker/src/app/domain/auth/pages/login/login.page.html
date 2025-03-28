@@ -1,18 +1,26 @@
-<form nz-form (ngSubmit)="login()" [formGroup]="loginForm">
-  <nz-form-item>
-    <nz-form-label [nzSpan]="6" nzFor="email">E-mail</nz-form-label>
-    <nz-form-control [nzSpan]="14">
-      <input nz-input type="email" formControlName="email" />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="6" nzFor="password">Password</nz-form-label>
-    <nz-form-control [nzSpan]="14">
-      <input nz-input type="password" formControlName="password" />
-    </nz-form-control>
-  </nz-form-item>
+<nz-card>
+  <h1 class="title" nz-typography>Acessar</h1>
+  <p nz-typography>Faça login e comece a estimar suas tarefas de forma colaborativa.</p>
+  <form nz-form (ngSubmit)="login()" [formGroup]="loginForm">
+    <nz-form-item>
+      <nz-form-control [nzSpan]="24">
+        <nz-input-group nzPrefixIcon="mail" nzSize="large">
+          <input nz-input type="email" formControlName="email" placeholder="Digite seu e-mail" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzSpan]="24">
+        <nz-input-group nzPrefixIcon="lock" nzSize="large">
+          <input nz-input type="password" formControlName="password" placeholder="Digite sua senha" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
 
+    <button nz-button nzType="primary" nzBlock>Login</button>
+  </form>
   <a routerLink="/auth/forgot-password">Esqueceu sua senha?</a>
-
-  <button nz-button nzType="primary">Login</button>
-</form>
+  <nz-divider></nz-divider>
+  <span nz-typography>Precisa criar uma conta?</span>
+  <a routerLink="/auth/sign-up">Crie uma conta</a>
+</nz-card>

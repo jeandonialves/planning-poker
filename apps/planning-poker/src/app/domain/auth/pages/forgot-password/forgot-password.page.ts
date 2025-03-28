@@ -1,15 +1,18 @@
 import { injectSupabase } from '@shared/functions/inject-supabase.function';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { Component, inject, model, signal } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { Component, inject, model } from '@angular/core';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-forgot-password',
-  imports: [NzFormModule, NzButtonModule, NzInputModule, FormsModule, RouterModule],
+  imports: [NzFormModule, NzButtonModule, NzInputModule, NzTypographyModule, NzDividerModule, NzCardModule, FormsModule, RouterModule],
   templateUrl: './forgot-password.page.html',
   styleUrl: './forgot-password.page.scss',
 })
