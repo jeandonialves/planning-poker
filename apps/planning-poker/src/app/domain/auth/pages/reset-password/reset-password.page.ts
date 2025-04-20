@@ -1,5 +1,5 @@
-import { injectSupabase } from '@shared/functions/inject-supabase.function';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { AuthService } from '@domain/auth/services/auth.service';
 import { Component, inject, model } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -15,22 +15,23 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './reset-password.page.scss',
 })
 export class ResetPasswordPage {
-  private supabase = injectSupabase();
-  private notificationService = inject(NzNotificationService);
   private router = inject(Router);
+  private authService = inject(AuthService);
+  private notificationService = inject(NzNotificationService);
 
   password = model('');
 
-  async submit() {
-    const { error } = await this.supabase.auth.updateUser({ password: this.password() });
-
-    if (error) {
-      this.notificationService.error('Erro', error.message);
-      return;
-    } else {
-      this.notificationService.success('Senha alterada', 'Senha alterada com sucesso');
-      this.password.set('');
-      this.router.navigate(['/']);
-    }
+  submit() {
+    this.authService.updatePassword(this.password()).subscribe({
+      next: result => {
+        if (result.error) {
+          this.notificationService.error('Erro', result.error.message);
+        } else {
+          this.notificationService.success('Senha alterada', 'Senha alterada com sucesso');
+          this.password.set('');
+          this.router.navigate(['/']);
+        }
+      },
+    });
   }
 }

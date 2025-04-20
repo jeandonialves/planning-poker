@@ -1,4 +1,3 @@
-import { isLoggedInGuard } from '@core/guards/is-logged-in/is-logged-in.guard';
 import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
@@ -9,10 +8,6 @@ export const appRoutes: Route[] = [
       {
         path: '',
         loadChildren: () => import('./domain/auth/auth.routes').then(m => m.AUTH_ROUTES),
-      },
-      {
-        path: 'reset-password',
-        loadComponent: () => import('./core/pages/reset-password/reset-password.page').then(m => m.ResetPasswordPage),
       },
     ],
   },

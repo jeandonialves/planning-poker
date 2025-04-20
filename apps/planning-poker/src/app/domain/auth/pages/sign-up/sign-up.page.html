@@ -1,0 +1,30 @@
+<nz-card>
+  <h2 class="title" nz-typography>Crie sua conta</h2>
+  <p nz-typography>Junte-se a nós e comece a planejar de forma colaborativa!</p>
+  <form nz-form (ngSubmit)="submit()" [formGroup]="signUpForm">
+    <nz-form-item>
+      <nz-form-control [nzSpan]="24">
+        <nz-input-group nzPrefixIcon="user" nzSize="large">
+          <input nz-input type="full_name" formControlName="full_name" placeholder="Digite seu nome completo" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzSpan]="24">
+        <nz-input-group nzPrefixIcon="mail" nzSize="large">
+          <input nz-input type="email" formControlName="email" placeholder="Digite seu e-mail" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzSpan]="24">
+        <nz-input-group nzPrefixIcon="lock" nzSize="large">
+          <input nz-input type="password" formControlName="password" placeholder="Digite sua senha" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <button nz-button nzType="primary" nzBlock>Jogar</button>
+  </form>
+  <a routerLink="/auth">Voltar ao início de sessão</a>
+</nz-card>

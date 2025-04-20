@@ -3,7 +3,6 @@ import { injectSupabase } from '@shared/functions/inject-supabase.function';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { AuthService } from '@domain/auth/services/auth.service';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { Router, RouterModule } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -12,40 +11,41 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { Component, inject } from '@angular/core';
 
 @Component({
-  selector: 'app-login',
-  imports: [NzFormModule, NzButtonModule, NzInputModule, NzDividerModule, NzTypographyModule, NzCardModule, ReactiveFormsModule, RouterModule],
-  templateUrl: './login.page.html',
-  styleUrl: './login.page.scss',
+  selector: 'app-sign-up',
+  imports: [NzFormModule, NzButtonModule, NzInputModule, NzTypographyModule, NzCardModule, ReactiveFormsModule, RouterModule],
+  templateUrl: './sign-up.page.html',
+  styleUrl: './sign-up.page.scss',
 })
-export class LoginPage {
+export class SignUpPage {
   private router = inject(Router);
   private authService = inject(AuthService);
   private notificationService = inject(NzNotificationService);
 
-  loginForm: FormGroup;
+  signUpForm: FormGroup;
 
   constructor() {
-    this.loginForm = new FormGroup({
+    this.signUpForm = new FormGroup({
+      full_name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });
   }
 
-  login() {
-    if (!this.loginForm.valid) {
+  submit() {
+    if (!this.signUpForm.valid) {
       this.notificationService.error('Error', 'Preencha os campos corretamente');
       return;
     }
 
-    const rawForm = this.loginForm.getRawValue();
+    const rawForm = this.signUpForm.getRawValue();
 
-    this.authService.login(rawForm.email, rawForm.password).subscribe({
+    this.authService.register(rawForm.email, rawForm.password, rawForm.full_name).subscribe({
       next: result => {
         if (result.error) {
           this.notificationService.error('Erro', result.error.message);
         } else {
-          this.notificationService.success('Sucesso', 'Login realizado com sucesso');
-          this.router.navigate(['/']);
+          this.notificationService.success('Sucesso', 'Usuário criado com sucesso');
+          this.router.navigate(['/auth']);
         }
       },
     });

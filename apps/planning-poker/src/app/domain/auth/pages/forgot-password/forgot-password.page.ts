@@ -1,5 +1,5 @@
-import { injectSupabase } from '@shared/functions/inject-supabase.function';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { AuthService } from '@domain/auth/services/auth.service';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { Component, inject, model } from '@angular/core';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -17,15 +17,21 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './forgot-password.page.scss',
 })
 export class ForgotPasswordPage {
-  private supabase = injectSupabase();
+  private authService = inject(AuthService);
   private notificationService = inject(NzNotificationService);
 
   email = model('');
 
-  async submit() {
-    await this.supabase.auth.resetPasswordForEmail(this.email());
-    this.notificationService.success('Email enviado', 'Verifique sua caixa de entrada');
-
-    this.email.set('');
+  submit() {
+    this.authService.resetPassword(this.email()).subscribe({
+      next: result => {
+        if (result.error) {
+          this.notificationService.error('Erro', result.error.message);
+        } else {
+          this.notificationService.success('Email enviado', 'Verifique sua caixa de entrada');
+          this.email.set('');
+        }
+      },
+    });
   }
 }
