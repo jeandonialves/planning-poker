@@ -1,0 +1,10 @@
+nz-layout {
+  nz-header {
+    color: white;
+  }
+
+  nz-content {
+    padding: 25px 50px;
+    min-height: calc(100vh - 64px);
+  }
+}

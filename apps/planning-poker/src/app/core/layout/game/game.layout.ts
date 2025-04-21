@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 
 @Component({
   imports: [RouterModule, NzLayoutModule],
-  templateUrl: './auth.layout.html',
-  styleUrl: './auth.layout.scss',
+  templateUrl: './game.layout.html',
+  styleUrl: './game.layout.scss',
 })
-export class AuthLayout {}
+export class GameLayout {}

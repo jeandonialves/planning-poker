@@ -1,0 +1,10 @@
+@let room = room$ | async; @if (room) {
+<p>ID da Sala: {{ room.id }}</p>
+
+<app-players [roomId]="room.id" />
+
+}
+
+<button (click)="deleteEstimates()">Deletar estimativas</button>
+
+<button (click)="vote()">Votar</button>

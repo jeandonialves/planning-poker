@@ -1,0 +1,6 @@
+@let participants = participants$ | async; @if (participants) { @for(participant of participants; track participant.user.id) {
+<div>
+  <span>Nome: {{ participant.user.full_name }}</span> - <span>Role: {{ participant.role }}</span> -
+  <span>Votação: {{ participant.vote }}</span>
+</div>
+} }

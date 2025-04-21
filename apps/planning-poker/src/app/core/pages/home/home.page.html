@@ -1,0 +1,142 @@
+<div style="margin: 0; font-family: Arial, sans-serif; line-height: 1.6; color: #333; background: #f9f9f9">
+  <header
+    style="
+      background: white;
+      position: sticky;
+      top: 0;
+      width: 100%;
+      padding: 15px 30px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    "
+  >
+    <div style="font-size: 20px; font-weight: bold; color: #4f46e5">
+      <!-- Pode substituir pelo <img src="logo.png" alt="Planning Poker" style="height:32px;"> -->
+      <svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+        <style>
+          .logo-card {
+            fill: #4f46e5;
+            transform: translateY(-20px);
+            opacity: 0;
+            animation: slideIn 1s ease-out forwards;
+          }
+
+          .logo-text {
+            fill: #1f2937;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            font-size: 18px;
+            opacity: 0;
+            animation: fadeInText 1s ease-out 0.8s forwards;
+          }
+
+          @keyframes slideIn {
+            to {
+              transform: translateY(0);
+              opacity: 1;
+            }
+          }
+
+          @keyframes fadeInText {
+            to {
+              opacity: 1;
+            }
+          }
+        </style>
+
+        <!-- Ícone carta estilizada -->
+        <rect class="logo-card" x="10" y="10" rx="5" ry="5" width="30" height="40" />
+        <circle class="logo-card" cx="25" cy="30" r="5" fill="white" />
+
+        <!-- Texto -->
+        <text class="logo-text" x="50" y="38">Planning Poker</text>
+      </svg>
+    </div>
+    <nav>
+      <a routerLink="/auth" style="margin-right: 20px; text-decoration: none; color: #4b5563; font-weight: 500">Login</a>
+      <a routerLink="/auth/sign-up" style="text-decoration: none; color: white; background: #4f46e5; padding: 10px 20px; border-radius: 5px; font-weight: bold">Registrar</a>
+    </nav>
+  </header>
+  <!-- Hero Section -->
+  <section style="background: #4f46e5; color: white; padding: 60px 20px; text-align: center">
+    <h1 style="font-size: 36px; margin-bottom: 10px">Torne suas estimativas ágeis mais colaborativas</h1>
+    <p style="font-size: 18px; max-width: 600px; margin: 0 auto 30px">Use Planning Poker online para estimar com precisão, engajar sua equipe e acelerar entregas.</p>
+    <a
+      routerLink="/auth/sign-up"
+      style="display: inline-block; background: #10b981; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold"
+    >
+      Comece agora
+    </a>
+  </section>
+
+  <!-- Como Funciona -->
+  <section style="padding: 60px 20px; text-align: center">
+    <h2 style="font-size: 28px; margin-bottom: 10px">Como funciona?</h2>
+    <p style="max-width: 600px; margin: 0 auto 40px; color: #666">Entenda o passo a passo para criar sua sessão de Planning Poker com sua equipe de forma simples e rápida.</p>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1000px; margin: auto">
+      <div style="flex: 1 1 200px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1)">
+        <h3>1. Crie uma sala</h3>
+        <p>Configure em segundos e comece rapidamente.</p>
+      </div>
+      <div style="flex: 1 1 200px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1)">
+        <h3>2. Convide seu time</h3>
+        <p>Compartilhe o link com sua equipe para votar.</p>
+      </div>
+      <div style="flex: 1 1 200px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1)">
+        <h3>3. Vote nas tarefas</h3>
+        <p>Cada membro escolhe sua estimativa com cartas.</p>
+      </div>
+      <div style="flex: 1 1 200px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1)">
+        <h3>4. Compare e decida</h3>
+        <p>Revele os votos, discuta e chegue ao consenso.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefícios -->
+  <section style="background: #eef2ff; padding: 60px 20px; text-align: center">
+    <h2 style="font-size: 28px; margin-bottom: 10px">Por que usar Planning Poker?</h2>
+    <p style="max-width: 600px; margin: 0 auto 40px; color: #666">Veja como nosso Planning Poker pode transformar a forma como sua equipe estima tarefas e define prioridades.</p>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 900px; margin: auto">
+      <div style="flex: 1 1 200px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1)">
+        <h4>🚀 Alinhamento do time</h4>
+        <p>Todos participam e entendem as estimativas.</p>
+      </div>
+      <div style="flex: 1 1 200px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1)">
+        <h4>🎯 Mais precisão</h4>
+        <p>Evite sub ou superestimativas nas sprints.</p>
+      </div>
+      <div style="flex: 1 1 200px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1)">
+        <h4>🌐 Totalmente online</h4>
+        <p>Ideal para equipes remotas ou híbridas.</p>
+      </div>
+      <div style="flex: 1 1 200px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1)">
+        <h4>⏱ Menos tempo perdido</h4>
+        <p>Estimativas objetivas e reuniões mais rápidas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section style="padding: 60px 20px; text-align: center">
+    <h2 style="font-size: 28px; margin-bottom: 20px">Pronto para melhorar suas estimativas?</h2>
+    <a
+      routerLink="/auth/sign-up"
+      style="display: inline-block; background: #4f46e5; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold"
+    >
+      Criar minha conta
+    </a>
+  </section>
+
+  <!-- Rodapé -->
+  <footer style="background: #1f2937; color: white; padding: 30px 20px; text-align: center">
+    <p style="margin: 0">© 2025 Planning Poker Online — Todos os direitos reservados</p>
+    <p style="margin: 5px 0 0; font-size: 14px">
+      <a href="/termos" style="color: #9ca3af; text-decoration: none; margin-right: 15px">Termos de uso</a>
+      <a href="/privacidade" style="color: #9ca3af; text-decoration: none">Política de privacidade</a>
+    </p>
+  </footer>
+</div>
